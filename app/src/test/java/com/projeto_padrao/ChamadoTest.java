@@ -56,7 +56,7 @@ public class ChamadoTest {
 
     }
     @Test
-    public void A_deletarChamados() {
+    public void B_deletarChamados() {
 
         RetrofitCallTest retrofitCallTest = new RetrofitCallTest();
         usuarioTeste = retrofitCallTest.B_login_Success();
@@ -92,7 +92,7 @@ public class ChamadoTest {
 
     }
     @Test
-    public void A_listarChamados() {
+    public void C_listarChamados() {
 
         RetrofitCallTest retrofitCallTest = new RetrofitCallTest();
         usuarioTeste =retrofitCallTest.B_login_Success();

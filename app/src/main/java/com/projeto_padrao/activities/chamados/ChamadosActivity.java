@@ -46,12 +46,7 @@ public class ChamadosActivity extends AppCompatActivity {
         });
 
 
-        List<Chamado> chamados = Chamado.listAll(Chamado.class);
 
-        if (chamados !=null){
-            ChamadosAdapter chamadosAdapter = new ChamadosAdapter (ChamadosActivity.this, chamados) ;
-            lista_chamados_ListView.setAdapter(chamadosAdapter);
-        }
 
         Chamado chamado = new Chamado();
         chamado.listarChamados(usuario.getKey(), lista_chamados_ListView, ChamadosActivity.this);

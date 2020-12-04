@@ -108,7 +108,11 @@ public class Chamado extends SugarRecord {
     }
 
     public void listarChamados(@NotNull String key, ListView lista_chamados_ListView, Context context) {
+
+        atualizarAdaptador(lista_chamados_ListView,context);
+
         Call<List<Chamado>> call = new RetrofitConfig().setChamadoService().listarChamados("Token " + key);
+
         call.enqueue(new Callback<List<Chamado>>() {
             @Override
             public void onResponse(Call<List<Chamado>> call, Response<List<Chamado>> response) {
@@ -138,6 +142,13 @@ public class Chamado extends SugarRecord {
         });
 
 
+    }
+
+    private void atualizarAdaptador(ListView lista_chamados_ListView, Context context) {
+        List<Chamado> chamados = Chamado.listAll(Chamado.class);
+
+        ChamadosAdapter chamadosAdapter = new ChamadosAdapter (context, chamados) ;
+        lista_chamados_ListView.setAdapter(chamadosAdapter);
     }
 
     public void deletarChamados(@NotNull String key) {

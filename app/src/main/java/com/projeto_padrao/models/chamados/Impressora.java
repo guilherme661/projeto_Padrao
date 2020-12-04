@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.orm.SugarRecord;
+import com.projeto_padrao.adapters.ChamadosAdapter;
 import com.projeto_padrao.api.retrofit.RetrofitConfig;
 
 import org.jetbrains.annotations.NotNull;
@@ -43,30 +44,16 @@ public class Impressora extends SugarRecord {
     }
 
     public void listarImpressoras(@NotNull String key, Context context, Spinner criar_chamado_activity_menuImpressora) {
+        atualizarAdaptador(context, criar_chamado_activity_menuImpressora, null);
+
         Call<List<Impressora>> call = new RetrofitConfig().setImpressoraService().listarImpressoras("Token " + key);
         call.enqueue(new Callback<List<Impressora>>() {
             @Override
             public void onResponse(Call<List<Impressora>> call, Response<List<Impressora>> response) {
                 if (response.isSuccessful()) {
                     List<Impressora> impressoras = response.body();
-                    ArrayList<String> items =new ArrayList<>();
 
-                    if (impressoras != null) {
-                        for (Impressora impressora : impressoras){
-                            impressora.save();
-
-                            items.add(impressora.getId().toString());
-
-                        }
-                    }
-
-
-
-                    criar_chamado_activity_menuImpressora.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, items));
-
-
-                    /*List<Impressora> impressoraList = Impressora.listAll(Impressora.class);*/
-                    Log.d("listarImpressoras", "listar");
+                    atualizarAdaptador(context, criar_chamado_activity_menuImpressora, impressoras);
 
                 }
 
@@ -79,6 +66,33 @@ public class Impressora extends SugarRecord {
 
             }
         });
+
+
+    }
+
+    private void atualizarAdaptador(Context context, Spinner criar_chamado_activity_menuImpressora, List<Impressora> impressorasRemoto) {
+
+        ArrayList<String> items = new ArrayList<>();
+        List<Impressora> impressoras = new ArrayList<>();
+
+
+        if (impressorasRemoto == null) {
+            impressoras = Impressora.listAll(Impressora.class);
+
+        } else {
+            impressoras = impressorasRemoto;
+        }
+
+        if (impressoras != null) {
+            for (Impressora impressora : impressoras) {
+                impressora.save();
+
+                items.add(impressora.getId().toString());
+
+            }
+        }
+
+        criar_chamado_activity_menuImpressora.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, items));
 
 
     }

@@ -8,6 +8,7 @@ import com.orm.SugarRecord;
 import com.projeto_padrao.activities.chamados.ChamadoDetalheActivity;
 import com.projeto_padrao.adapters.ChamadosAdapter;
 import com.projeto_padrao.api.retrofit.RetrofitConfig;
+import com.projeto_padrao.models.Aplicacao;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -218,7 +219,12 @@ public class Chamado extends SugarRecord {
         }
 
 
-    }
+
+
+
+
+
+}
 
 
 

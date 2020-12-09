@@ -2,13 +2,17 @@ package com.projeto_padrao.activities.chamados;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.projeto_padrao.R;
 import com.projeto_padrao.models.Aplicacao;
@@ -37,7 +41,13 @@ public class CriarChamadoActivity extends AppCompatActivity {
         inicializandoComponentes();
         criar_chamado_activity_erro_descricao.setVisibility(View.GONE);
         criar_chamado_activity_erro_titulo.setVisibility(View.GONE);
+
+
+
+
+
     }
+
 
 
     private void identificandoComponentes() {
@@ -97,6 +107,12 @@ public class CriarChamadoActivity extends AppCompatActivity {
         });
 
     }
+
+    public void emitirAlerta() {
+
+        Toast.makeText(this, "Impossível criar um chamado, conecte-se à rede!", Toast.LENGTH_SHORT).show();
+    }
+
 }
 
 

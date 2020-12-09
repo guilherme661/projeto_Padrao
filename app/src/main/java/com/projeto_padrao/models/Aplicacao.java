@@ -2,6 +2,8 @@ package com.projeto_padrao.models;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import com.projeto_padrao.activities.chamados.ChamadoDetalheActivity;
@@ -11,6 +13,8 @@ import com.projeto_padrao.activities.autenticacao.LoginActivity;
 import com.projeto_padrao.activities.autenticacao.RegisterActivity;
 import com.projeto_padrao.activities.usuario.ListarUsuariosActivity;
 import com.projeto_padrao.activities.usuario.UsuarioDetalheActivity;
+
+import java.net.InetAddress;
 
 
 public class Aplicacao {
@@ -109,6 +113,17 @@ public static void irParaCriarChamadoActivity(Context context){
         }
 
     }
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
 
 }
